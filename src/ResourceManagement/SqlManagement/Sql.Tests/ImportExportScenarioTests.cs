@@ -16,15 +16,15 @@ namespace Sql.Tests
     public class ImportExportScenarioTests
     {
         [Fact]
-        public void TestImportExistingDatabaseGetOperation()
+        public void TestImportExistingDatabase()
         {
             string testPrefix = "sqlcrudtest-";
             string suiteName = this.GetType().FullName;
-            string dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
-            string dbName2 = SqlManagementTestUtilities.GenerateName(testPrefix);
-            string storageAccountName = SqlManagementTestUtilities.GenerateName("sqlcrudstorage");
-            SqlManagementTestUtilities.RunTestInNewResourceGroup(suiteName, "TestImportExistingDatabaseGetOperation", testPrefix, (resClient, sqlClient, resourceGroup) =>
+            SqlManagementTestUtilities.RunTestInNewResourceGroup(suiteName, "TestImportExistingDatabase", testPrefix, (resClient, sqlClient, resourceGroup) =>
             {
+                string dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
+                string dbName2 = SqlManagementTestUtilities.GenerateName(testPrefix);
+                string storageAccountName = SqlManagementTestUtilities.GenerateName("sqlcrudstorage");
                 string serverNameV12 = SqlManagementTestUtilities.GenerateName(testPrefix);
                 string login = "dummylogin";
                 string password = "Un53cuRE!";
@@ -62,12 +62,12 @@ namespace Sql.Tests
                 });
 
                 // Get Storage container credentials
-                string testMode = HttpMockServer.GetCurrentMode().ToString();
                 string storageKey = "StorageKey";
                 string storageKeyType = "StorageAccessKey";
+                HttpRecorderMode testMode = HttpMockServer.GetCurrentMode();
                 string exportBacpacLink = string.Format(CultureInfo.InvariantCulture, "http://test.blob.core.windows.net/databases/{0}.bacpac", dbName);
 
-                if (testMode == "Record")
+                if (testMode == HttpRecorderMode.Record)
                 {
                     string importBacpacContainer = Environment.GetEnvironmentVariable("TEST_IMPORT_CONTAINER");
                     storageKey = Environment.GetEnvironmentVariable("TEST_STORAGE_KEY");
@@ -118,19 +118,19 @@ namespace Sql.Tests
         }
 
         [Fact]
-        public void TestExportImportNewDatabaseGetOperation()
+        public void TestImportNewDatabase()
         {
             string testPrefix = "sqlcrudtest-";
             string suiteName = this.GetType().FullName;
-            string dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
-            string dbName2 = SqlManagementTestUtilities.GenerateName(testPrefix);
-            string storageAccountName = SqlManagementTestUtilities.GenerateName("sqlcrudstorage");
-            SqlManagementTestUtilities.RunTestInNewResourceGroup(suiteName, "TestExportImportNewDatabase", testPrefix, (resClient, sqlClient, resourceGroup) =>
+            SqlManagementTestUtilities.RunTestInNewResourceGroup(suiteName, "TestImportNewDatabase", testPrefix, (resClient, sqlClient, resourceGroup) =>
             {
                 string serverNameV12 = SqlManagementTestUtilities.GenerateName(testPrefix);
                 string login = "dummylogin";
                 string password = "Un53cuRE!";
                 string version12 = "12.0";
+                string dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
+                string dbName2 = SqlManagementTestUtilities.GenerateName(testPrefix);
+                string storageAccountName = SqlManagementTestUtilities.GenerateName("sqlcrudstorage");
                 Dictionary<string, string> tags = new Dictionary<string, string>()
                     {
                         { "tagKey1", "TagValue1" }
@@ -164,12 +164,12 @@ namespace Sql.Tests
                 });
 
                 // Get Storage container credentials
-                string testMode = HttpMockServer.GetCurrentMode().ToString();
+                HttpRecorderMode testMode = HttpMockServer.GetCurrentMode();
                 string storageKey = "StorageKey";
                 string storageKeyType = "StorageAccessKey";
                 string exportBacpacLink = string.Format(CultureInfo.InvariantCulture, "http://test.blob.core.windows.net/databases/{0}.bacpac", dbName);
 
-                if (testMode == "Record")
+                if (testMode == HttpRecorderMode.Record)
                 {
                     string importBacpacContainer = Environment.GetEnvironmentVariable("TEST_IMPORT_CONTAINER");
                     storageKey = Environment.GetEnvironmentVariable("TEST_STORAGE_KEY");
