@@ -56,10 +56,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// If createMode is not set to Default, sourceDatabaseId must be
         /// specified. If createMode is set to PointInTimeRestore, then
         /// restorePointInTime must be specified. If createMode is set to
-        /// Restore, then sourceDatabaseDeletionDate must be specified.
-        /// Possible values include: 'Copy', 'Default', 'NonReadableSecondary',
-        /// 'OnlineSecondary', 'PointInTimeRestore', 'Recovery',
-        /// 'Restore'</param>
+        /// Restore, then sourceDatabaseDeletionDate must be specified. Copy,
+        /// NonReadableSecondary, and OnlineSecondary are not supported for
+        /// DataWarehouse edition. Possible values include: 'Copy', 'Default',
+        /// 'NonReadableSecondary', 'OnlineSecondary', 'PointInTimeRestore',
+        /// 'Recovery', 'Restore'</param>
         /// <param name="sourceDatabaseId">Conditional. If createMode is not
         /// set to Default, then this value must be specified. Specifies the
         /// resource ID of the source database. If createMode is
@@ -104,7 +105,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="elasticPoolName">The name of the elastic pool the
         /// database is in. If elasticPoolName and
         /// requestedServiceObjectiveName are both updated, the value of
-        /// requestedServiceObjectiveName is ignored.</param>
+        /// requestedServiceObjectiveName is ignored. Not supported for
+        /// DataWarehouse edition.</param>
         /// <param name="defaultSecondaryLocation">The default secondary region
         /// for this database.</param>
         /// <param name="serviceTierAdvisors">The list of service tier advisors
@@ -116,14 +118,15 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// database.</param>
         /// <param name="failoverGroupId">The id indicating the failover group
         /// containing this database.</param>
-        /// <param name="readScale">Conditional.  If the database is a
+        /// <param name="readScale">Conditional. If the database is a
         /// geo-secondary, readScale indicates whether read-only connections
-        /// are allowed to this database or not. Possible values include:
-        /// 'Enabled', 'Disabled'</param>
+        /// are allowed to this database or not. Not supported for
+        /// DataWarehouse edition. Possible values include: 'Enabled',
+        /// 'Disabled'</param>
         /// <param name="sampleName">Indicates the name of the sample schema to
         /// apply when creating this database. If createMode is not Default,
-        /// this value is ignored. Possible values include:
-        /// 'AdventureWorksLT'</param>
+        /// this value is ignored. Not supported for DataWarehouse edition.
+        /// Possible values include: 'AdventureWorksLT'</param>
         public Database(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string kind = default(string), string collation = default(string), System.DateTime? creationDate = default(System.DateTime?), long? containmentState = default(long?), System.Guid? currentServiceObjectiveId = default(System.Guid?), string databaseId = default(string), System.DateTime? earliestRestoreDate = default(System.DateTime?), string createMode = default(string), string sourceDatabaseId = default(string), System.DateTime? restorePointInTime = default(System.DateTime?), string edition = default(string), string maxSizeBytes = default(string), System.Guid? requestedServiceObjectiveId = default(System.Guid?), string requestedServiceObjectiveName = default(string), string serviceLevelObjective = default(string), string status = default(string), string elasticPoolName = default(string), string defaultSecondaryLocation = default(string), IList<ServiceTierAdvisor> serviceTierAdvisors = default(IList<ServiceTierAdvisor>), IList<Schema> schemas = default(IList<Schema>), IList<TransparentDataEncryption> transparentDataEncryption = default(IList<TransparentDataEncryption>), IList<RecommendedIndex> recommendedIndex = default(IList<RecommendedIndex>), System.Guid? failoverGroupId = default(System.Guid?), ReadScale? readScale = default(ReadScale?), string sampleName = default(string))
             : base(location, name, id, type, tags)
         {
@@ -205,9 +208,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// createMode is not set to Default, sourceDatabaseId must be
         /// specified. If createMode is set to PointInTimeRestore, then
         /// restorePointInTime must be specified. If createMode is set to
-        /// Restore, then sourceDatabaseDeletionDate must be specified.
-        /// Possible values include: 'Copy', 'Default', 'NonReadableSecondary',
-        /// 'OnlineSecondary', 'PointInTimeRestore', 'Recovery', 'Restore'
+        /// Restore, then sourceDatabaseDeletionDate must be specified. Copy,
+        /// NonReadableSecondary, and OnlineSecondary are not supported for
+        /// DataWarehouse edition. Possible values include: 'Copy', 'Default',
+        /// 'NonReadableSecondary', 'OnlineSecondary', 'PointInTimeRestore',
+        /// 'Recovery', 'Restore'
         /// </summary>
         [JsonProperty(PropertyName = "properties.createMode")]
         public string CreateMode { get; set; }
@@ -293,7 +298,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Gets or sets the name of the elastic pool the database is in. If
         /// elasticPoolName and requestedServiceObjectiveName are both updated,
-        /// the value of requestedServiceObjectiveName is ignored.
+        /// the value of requestedServiceObjectiveName is ignored. Not
+        /// supported for DataWarehouse edition.
         /// </summary>
         [JsonProperty(PropertyName = "properties.elasticPoolName")]
         public string ElasticPoolName { get; set; }
@@ -336,10 +342,10 @@ namespace Microsoft.Azure.Management.Sql.Models
         public System.Guid? FailoverGroupId { get; protected set; }
 
         /// <summary>
-        /// Gets or sets conditional.  If the database is a geo-secondary,
+        /// Gets or sets conditional. If the database is a geo-secondary,
         /// readScale indicates whether read-only connections are allowed to
-        /// this database or not. Possible values include: 'Enabled',
-        /// 'Disabled'
+        /// this database or not. Not supported for DataWarehouse edition.
+        /// Possible values include: 'Enabled', 'Disabled'
         /// </summary>
         [JsonProperty(PropertyName = "properties.readScale")]
         public ReadScale? ReadScale { get; set; }
@@ -347,7 +353,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Gets or sets indicates the name of the sample schema to apply when
         /// creating this database. If createMode is not Default, this value is
-        /// ignored. Possible values include: 'AdventureWorksLT'
+        /// ignored. Not supported for DataWarehouse edition. Possible values
+        /// include: 'AdventureWorksLT'
         /// </summary>
         [JsonProperty(PropertyName = "properties.sampleName")]
         public string SampleName { get; set; }
