@@ -71,9 +71,14 @@ namespace Microsoft.Azure.Management.Sql
 
 
         /// <summary>
-        /// Gets the IServersOperations.
+        /// Gets the ICapabilitiesOperations.
         /// </summary>
-        IServersOperations Servers { get; }
+        ICapabilitiesOperations Capabilities { get; }
+
+        /// <summary>
+        /// Gets the IFirewallRulesOperations.
+        /// </summary>
+        IFirewallRulesOperations FirewallRules { get; }
 
         /// <summary>
         /// Gets the IDatabasesOperations.
@@ -81,9 +86,9 @@ namespace Microsoft.Azure.Management.Sql
         IDatabasesOperations Databases { get; }
 
         /// <summary>
-        /// Gets the IImportExportOperations.
+        /// Gets the IServersOperations.
         /// </summary>
-        IImportExportOperations ImportExportOperations { get; }
+        IServersOperations Servers { get; }
 
         /// <summary>
         /// Gets the IElasticPoolsOperations.

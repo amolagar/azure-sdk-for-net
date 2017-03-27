@@ -14,15 +14,13 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Rest;
     using Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Represents a database restore point.
     /// </summary>
     [JsonTransformation]
-    public partial class RestorePoint : Resource
+    public partial class RestorePoint : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the RestorePoint class.
@@ -32,11 +30,9 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the RestorePoint class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
         /// <param name="restorePointType">The restore point type of the
         /// database restore point. Possible values include: 'DISCRETE',
         /// 'CONTINUOUS'</param>
@@ -46,8 +42,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="earliestRestoreDate">Earliest restore time (ISO8601
         /// format). Populated when restorePointType = DISCRETE. Null
         /// otherwise.</param>
-        public RestorePoint(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), RestorePointTypes? restorePointType = default(RestorePointTypes?), System.DateTime? restorePointCreationDate = default(System.DateTime?), System.DateTime? earliestRestoreDate = default(System.DateTime?))
-            : base(location, name, id, type, tags)
+        public RestorePoint(string id = default(string), string name = default(string), string type = default(string), RestorePointTypes? restorePointType = default(RestorePointTypes?), System.DateTime? restorePointCreationDate = default(System.DateTime?), System.DateTime? earliestRestoreDate = default(System.DateTime?))
+            : base(id, name, type)
         {
             RestorePointType = restorePointType;
             RestorePointCreationDate = restorePointCreationDate;
@@ -75,16 +71,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         [JsonProperty(PropertyName = "properties.earliestRestoreDate")]
         public System.DateTime? EarliestRestoreDate { get; protected set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }
 

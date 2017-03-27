@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database service objective.
     /// </summary>
     [JsonTransformation]
-    public partial class ServiceObjective : SqlSubResource
+    public partial class ServiceObjective : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the ServiceObjective class.

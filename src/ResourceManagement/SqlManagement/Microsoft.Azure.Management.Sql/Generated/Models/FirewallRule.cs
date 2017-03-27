@@ -20,15 +20,15 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a server firewall rule.
     /// </summary>
     [JsonTransformation]
-    public partial class ServerFirewallRule : SqlSubResource
+    public partial class FirewallRule : SubResource
     {
         /// <summary>
-        /// Initializes a new instance of the ServerFirewallRule class.
+        /// Initializes a new instance of the FirewallRule class.
         /// </summary>
-        public ServerFirewallRule() { }
+        public FirewallRule() { }
 
         /// <summary>
-        /// Initializes a new instance of the ServerFirewallRule class.
+        /// Initializes a new instance of the FirewallRule class.
         /// </summary>
         /// <param name="startIpAddress">The start IP address of the firewall
         /// rule. Must be IPv4 format. Use value '0.0.0.0' to represent all
@@ -44,7 +44,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="location">Location of the server that contains this
         /// firewall rule.</param>
         /// <param name="type">Type of resource this is.</param>
-        public ServerFirewallRule(string startIpAddress, string endIpAddress, string name = default(string), string id = default(string), string kind = default(string), string location = default(string), string type = default(string))
+        public FirewallRule(string startIpAddress, string endIpAddress, string name = default(string), string id = default(string), string kind = default(string), string location = default(string), string type = default(string))
             : base(name, id)
         {
             Kind = kind;

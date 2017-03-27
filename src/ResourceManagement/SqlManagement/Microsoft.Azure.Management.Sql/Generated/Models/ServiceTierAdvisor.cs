@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a Service Tier Advisor.
     /// </summary>
     [JsonTransformation]
-    public partial class ServiceTierAdvisor : SqlSubResource
+    public partial class ServiceTierAdvisor : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the ServiceTierAdvisor class.

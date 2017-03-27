@@ -74,9 +74,14 @@ namespace Microsoft.Azure.Management.Sql
         public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
-        /// Gets the IServersOperations.
+        /// Gets the ICapabilitiesOperations.
         /// </summary>
-        public virtual IServersOperations Servers { get; private set; }
+        public virtual ICapabilitiesOperations Capabilities { get; private set; }
+
+        /// <summary>
+        /// Gets the IFirewallRulesOperations.
+        /// </summary>
+        public virtual IFirewallRulesOperations FirewallRules { get; private set; }
 
         /// <summary>
         /// Gets the IDatabasesOperations.
@@ -84,9 +89,9 @@ namespace Microsoft.Azure.Management.Sql
         public virtual IDatabasesOperations Databases { get; private set; }
 
         /// <summary>
-        /// Gets the IImportExportOperations.
+        /// Gets the IServersOperations.
         /// </summary>
-        public virtual IImportExportOperations ImportExportOperations { get; private set; }
+        public virtual IServersOperations Servers { get; private set; }
 
         /// <summary>
         /// Gets the IElasticPoolsOperations.
@@ -299,9 +304,10 @@ namespace Microsoft.Azure.Management.Sql
         /// </summary>
         private void Initialize()
         {
-            Servers = new ServersOperations(this);
+            Capabilities = new CapabilitiesOperations(this);
+            FirewallRules = new FirewallRulesOperations(this);
             Databases = new DatabasesOperations(this);
-            ImportExportOperations = new ImportExportOperations(this);
+            Servers = new ServersOperations(this);
             ElasticPools = new ElasticPoolsOperations(this);
             RecommendedElasticPools = new RecommendedElasticPoolsOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");

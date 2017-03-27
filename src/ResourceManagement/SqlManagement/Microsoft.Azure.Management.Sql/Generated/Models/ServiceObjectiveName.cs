@@ -30,6 +30,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         public const string P11 = "P11";
         public const string P15 = "P15";
         public const string System = "System";
+        public const string System2 = "System2";
         public const string ElasticPool = "ElasticPool";
     }
 }

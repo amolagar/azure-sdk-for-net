@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a server.
     /// </summary>
     [JsonTransformation]
-    public partial class Server : Resource
+    public partial class Server : TrackedResource
     {
         /// <summary>
         /// Initializes a new instance of the Server class.
@@ -32,11 +32,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the Server class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="location">Resource location.</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
+        /// <param name="tags">Resource tags.</param>
         /// <param name="kind">Kind of sql server.  This is metadata used for
         /// the Azure portal experience.</param>
         /// <param name="fullyQualifiedDomainName">The fully qualified domain
@@ -59,8 +59,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// .../servers/{serverName}/administrators</param>
         /// <param name="state">The state of the server. Possible values
         /// include: 'Ready', 'Disabled'</param>
-        public Server(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string kind = default(string), string fullyQualifiedDomainName = default(string), string version = default(string), string administratorLogin = default(string), string administratorLoginPassword = default(string), System.Guid? externalAdministratorSid = default(System.Guid?), string externalAdministratorLogin = default(string), ServerState? state = default(ServerState?))
-            : base(location, name, id, type, tags)
+        public Server(string location, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string kind = default(string), string fullyQualifiedDomainName = default(string), string version = default(string), string administratorLogin = default(string), string administratorLoginPassword = default(string), System.Guid? externalAdministratorSid = default(System.Guid?), string externalAdministratorLogin = default(string), ServerState? state = default(ServerState?))
+            : base(location, id, name, type, tags)
         {
             Kind = kind;
             FullyQualifiedDomainName = fullyQualifiedDomainName;

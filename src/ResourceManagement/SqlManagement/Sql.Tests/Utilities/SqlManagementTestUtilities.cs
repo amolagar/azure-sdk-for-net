@@ -17,11 +17,24 @@ namespace Sql.Tests
 {
     public class SqlManagementTestUtilities
     {
+        // Use of two location variables is necessary because of discrepancies in the two ARM APIs.
+        // 2015-05-01-preview version of Servers ARM APIs follows the ARM Standard, which is the normalized location format (all lowercase, no spaces).
+        // The rest of our ARM APIs have capitalized, space-separated location names.
+        // Servers should be compared against normalized location, the rest of the APIs will probably use Default location.
+        // Tests should be updated if APIs are updated to use the newer format (will probably accompany a migration of the API to 2015-05-01-preview)   
         public static string DefaultLocation
         {
             get
             {
                 return "Japan East";
+            }
+        }
+
+        public static string DefaultNormalizedLocation
+        {
+            get
+            {
+                return "japaneast";
             }
         }
 
@@ -234,7 +247,7 @@ namespace Sql.Tests
             Assert.NotNull(actual.Type);
         }
 
-        public static void ValidateFirewallRule(ServerFirewallRule expected, ServerFirewallRule actual, string name)
+        public static void ValidateFirewallRule(FirewallRule expected, FirewallRule actual, string name)
         {
             Assert.NotNull(actual.Id);
             Assert.Equal(expected.StartIpAddress, actual.StartIpAddress);
@@ -268,7 +281,7 @@ namespace Sql.Tests
                 {
                     if (resourceGroup != null)
                     {
-                        resourceClient.ResourceGroups.Delete(resourceGroup.Name);
+                        resourceClient.ResourceGroups.BeginDelete(resourceGroup.Name);
                     }
                 }
             }
@@ -295,7 +308,7 @@ namespace Sql.Tests
                     Tags = tags,
                     Location = SqlManagementTestUtilities.DefaultLocation,
                 });
-                SqlManagementTestUtilities.ValidateServer(v12Server, serverNameV12, login, version12, tags, SqlManagementTestUtilities.DefaultLocation);
+                SqlManagementTestUtilities.ValidateServer(v12Server, serverNameV12, login, version12, tags, SqlManagementTestUtilities.DefaultNormalizedLocation);
 
                 test(resClient, sqlClient, resGroup, v12Server);
             });

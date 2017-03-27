@@ -13,9 +13,9 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Sql;
 
     /// <summary>
-    /// Defines values for DatabaseEditions.
+    /// Defines values for DatabaseEdition.
     /// </summary>
-    public static class DatabaseEditions
+    public static class DatabaseEdition
     {
         public const string Web = "Web";
         public const string Business = "Business";
@@ -26,6 +26,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         public const string Stretch = "Stretch";
         public const string DataWarehouse = "DataWarehouse";
         public const string System = "System";
+        public const string System2 = "System2";
     }
 }
 

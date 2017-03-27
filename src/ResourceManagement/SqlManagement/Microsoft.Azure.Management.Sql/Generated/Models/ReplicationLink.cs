@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database replication link.
     /// </summary>
     [JsonTransformation]
-    public partial class ReplicationLink : SqlSubResource
+    public partial class ReplicationLink : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the ReplicationLink class.

@@ -24,8 +24,56 @@ namespace Microsoft.Azure.Management.Sql
     public static partial class DatabasesOperationsExtensions
     {
             /// <summary>
-            /// Imports a bacpac into an existing database. The existing database must be
-            /// empty.
+            /// Imports a bacpac into a new database.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='parameters'>
+            /// The required parameters for importing a Bacpac into a database.
+            /// </param>
+            public static ImportExportResponse Import(this IDatabasesOperations operations, string resourceGroupName, string serverName, ImportRequest parameters)
+            {
+                return operations.ImportAsync(resourceGroupName, serverName, parameters).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Imports a bacpac into a new database.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='parameters'>
+            /// The required parameters for importing a Bacpac into a database.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ImportExportResponse> ImportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, ImportRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ImportWithHttpMessagesAsync(resourceGroupName, serverName, parameters, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates an import operation that imports a bacpac into an existing
+            /// database. The existing database must be empty.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -43,14 +91,14 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for importing a Bacpac into a database.
             /// </param>
-            public static ImportExportOperationResponse Import(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequestParameters parameters)
+            public static ImportExportResponse CreateImportOperation(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequest parameters)
             {
-                return operations.ImportAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+                return operations.CreateImportOperationAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Imports a bacpac into an existing database. The existing database must be
-            /// empty.
+            /// Creates an import operation that imports a bacpac into an existing
+            /// database. The existing database must be empty.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -71,9 +119,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ImportExportOperationResponse> ImportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequestParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ImportExportResponse> CreateImportOperationAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ImportWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateImportOperationWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -98,7 +146,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for exporting a database.
             /// </param>
-            public static ImportExportOperationResponse Export(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequestParameters parameters)
+            public static ImportExportResponse Export(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequest parameters)
             {
                 return operations.ExportAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -125,7 +173,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ImportExportOperationResponse> ExportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequestParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ImportExportResponse> ExportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ExportWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -406,9 +454,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='databaseName'>
             /// The name of the data warehouse to pause.
             /// </param>
-            public static void PauseDataWarehouse(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            public static void Pause(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
             {
-                operations.PauseDataWarehouseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                operations.PauseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -430,9 +478,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PauseDataWarehouseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PauseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PauseDataWarehouseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
+                await operations.PauseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -451,9 +499,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='databaseName'>
             /// The name of the data warehouse to resume.
             /// </param>
-            public static void ResumeDataWarehouse(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            public static void Resume(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
             {
-                operations.ResumeDataWarehouseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                operations.ResumeAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -475,9 +523,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ResumeDataWarehouseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ResumeAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ResumeDataWarehouseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
+                await operations.ResumeWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -649,7 +697,7 @@ namespace Microsoft.Azure.Management.Sql
             /// </param>
             /// <param name='expand'>
             /// A comma separated list of child objects to expand in the response. Possible
-            /// properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption.
+            /// properties: serviceTierAdvisors, transparentDataEncryption.
             /// </param>
             public static Database Get(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, string expand = default(string))
             {
@@ -674,7 +722,7 @@ namespace Microsoft.Azure.Management.Sql
             /// </param>
             /// <param name='expand'>
             /// A comma separated list of child objects to expand in the response. Possible
-            /// properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption.
+            /// properties: serviceTierAdvisors, transparentDataEncryption.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -700,12 +748,16 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
+            /// <param name='expand'>
+            /// A comma separated list of child objects to expand in the response. Possible
+            /// properties: serviceTierAdvisors, transparentDataEncryption.
+            /// </param>
             /// <param name='filter'>
             /// An OData filter expression that describes a subset of databases to return.
             /// </param>
-            public static IEnumerable<Database> ListByServer(this IDatabasesOperations operations, string resourceGroupName, string serverName, string filter = default(string))
+            public static IEnumerable<Database> ListByServer(this IDatabasesOperations operations, string resourceGroupName, string serverName, string expand = default(string), string filter = default(string))
             {
-                return operations.ListByServerAsync(resourceGroupName, serverName, filter).GetAwaiter().GetResult();
+                return operations.ListByServerAsync(resourceGroupName, serverName, expand, filter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -721,15 +773,19 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
+            /// <param name='expand'>
+            /// A comma separated list of child objects to expand in the response. Possible
+            /// properties: serviceTierAdvisors, transparentDataEncryption.
+            /// </param>
             /// <param name='filter'>
             /// An OData filter expression that describes a subset of databases to return.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IEnumerable<Database>> ListByServerAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string filter = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IEnumerable<Database>> ListByServerAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string expand = default(string), string filter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ListByServerWithHttpMessagesAsync(resourceGroupName, serverName, filter, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ListByServerWithHttpMessagesAsync(resourceGroupName, serverName, expand, filter, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -906,7 +962,7 @@ namespace Microsoft.Azure.Management.Sql
             /// The status of the database transparent data encryption. Possible values
             /// include: 'Enabled', 'Disabled'
             /// </param>
-            public static TransparentDataEncryption CreateOrUpdateTransparentDataEncryptionConfiguration(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, TransparentDataEncryptionStates? status = default(TransparentDataEncryptionStates?))
+            public static TransparentDataEncryption CreateOrUpdateTransparentDataEncryptionConfiguration(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, TransparentDataEncryptionStatus? status = default(TransparentDataEncryptionStatus?))
             {
                 return operations.CreateOrUpdateTransparentDataEncryptionConfigurationAsync(resourceGroupName, serverName, databaseName, status).GetAwaiter().GetResult();
             }
@@ -935,7 +991,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TransparentDataEncryption> CreateOrUpdateTransparentDataEncryptionConfigurationAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, TransparentDataEncryptionStates? status = default(TransparentDataEncryptionStates?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<TransparentDataEncryption> CreateOrUpdateTransparentDataEncryptionConfigurationAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, TransparentDataEncryptionStatus? status = default(TransparentDataEncryptionStatus?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdateTransparentDataEncryptionConfigurationWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, status, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1040,8 +1096,266 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Imports a bacpac into an existing database. The existing database must be
-            /// empty.
+            /// Gets a database's threat detection policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database Threat Detection policy is
+            /// defined.
+            /// </param>
+            public static DatabaseSecurityAlertPolicy GetThreatDetectionPolicy(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            {
+                return operations.GetThreatDetectionPolicyAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a database's threat detection policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database Threat Detection policy is
+            /// defined.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DatabaseSecurityAlertPolicy> GetThreatDetectionPolicyAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetThreatDetectionPolicyWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates or updates a database's threat detection policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database Threat Detection policy is
+            /// defined.
+            /// </param>
+            /// <param name='parameters'>
+            /// The database Threat Detection policy.
+            /// </param>
+            public static DatabaseSecurityAlertPolicy CreateOrUpdateThreatDetectionPolicy(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseSecurityAlertPolicy parameters)
+            {
+                return operations.CreateOrUpdateThreatDetectionPolicyAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates or updates a database's threat detection policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database Threat Detection policy is
+            /// defined.
+            /// </param>
+            /// <param name='parameters'>
+            /// The database Threat Detection policy.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DatabaseSecurityAlertPolicy> CreateOrUpdateThreatDetectionPolicyAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseSecurityAlertPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateOrUpdateThreatDetectionPolicyWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets a database's blob auditing policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database blob audit policy is defined.
+            /// </param>
+            public static DatabaseBlobAuditingPolicy GetBlobAuditingPolicy(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            {
+                return operations.GetBlobAuditingPolicyAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a database's blob auditing policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database blob audit policy is defined.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DatabaseBlobAuditingPolicy> GetBlobAuditingPolicyAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetBlobAuditingPolicyWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates or updates a database's blob auditing policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database blob audit policy will be
+            /// defined.
+            /// </param>
+            /// <param name='parameters'>
+            /// The database blob auditing policy.
+            /// </param>
+            public static DatabaseBlobAuditingPolicy CreateOrUpdateBlobAuditingPolicy(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseBlobAuditingPolicy parameters)
+            {
+                return operations.CreateOrUpdateBlobAuditingPolicyAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates or updates a database's blob auditing policy.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='databaseName'>
+            /// The name of the database for which database blob audit policy will be
+            /// defined.
+            /// </param>
+            /// <param name='parameters'>
+            /// The database blob auditing policy.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DatabaseBlobAuditingPolicy> CreateOrUpdateBlobAuditingPolicyAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseBlobAuditingPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateOrUpdateBlobAuditingPolicyWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Imports a bacpac into a new database.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='parameters'>
+            /// The required parameters for importing a Bacpac into a database.
+            /// </param>
+            public static ImportExportResponse BeginImport(this IDatabasesOperations operations, string resourceGroupName, string serverName, ImportRequest parameters)
+            {
+                return operations.BeginImportAsync(resourceGroupName, serverName, parameters).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Imports a bacpac into a new database.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='parameters'>
+            /// The required parameters for importing a Bacpac into a database.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ImportExportResponse> BeginImportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, ImportRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginImportWithHttpMessagesAsync(resourceGroupName, serverName, parameters, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates an import operation that imports a bacpac into an existing
+            /// database. The existing database must be empty.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1059,14 +1373,14 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for importing a Bacpac into a database.
             /// </param>
-            public static ImportExportOperationResponse BeginImport(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequestParameters parameters)
+            public static ImportExportResponse BeginCreateImportOperation(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequest parameters)
             {
-                return operations.BeginImportAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+                return operations.BeginCreateImportOperationAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Imports a bacpac into an existing database. The existing database must be
-            /// empty.
+            /// Creates an import operation that imports a bacpac into an existing
+            /// database. The existing database must be empty.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1087,9 +1401,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ImportExportOperationResponse> BeginImportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequestParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ImportExportResponse> BeginCreateImportOperationAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ImportExtensionRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.BeginImportWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.BeginCreateImportOperationWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1114,7 +1428,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for exporting a database.
             /// </param>
-            public static ImportExportOperationResponse BeginExport(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequestParameters parameters)
+            public static ImportExportResponse BeginExport(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequest parameters)
             {
                 return operations.BeginExportAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -1141,7 +1455,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ImportExportOperationResponse> BeginExportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequestParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ImportExportResponse> BeginExportAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, ExportRequest parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginExportWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1269,9 +1583,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='databaseName'>
             /// The name of the data warehouse to pause.
             /// </param>
-            public static void BeginPauseDataWarehouse(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            public static void BeginPause(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
             {
-                operations.BeginPauseDataWarehouseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                operations.BeginPauseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1293,9 +1607,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPauseDataWarehouseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task BeginPauseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPauseDataWarehouseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
+                await operations.BeginPauseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -1314,9 +1628,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='databaseName'>
             /// The name of the data warehouse to resume.
             /// </param>
-            public static void BeginResumeDataWarehouse(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            public static void BeginResume(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName)
             {
-                operations.BeginResumeDataWarehouseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                operations.BeginResumeAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1338,9 +1652,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginResumeDataWarehouseAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task BeginResumeAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginResumeDataWarehouseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
+                await operations.BeginResumeWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

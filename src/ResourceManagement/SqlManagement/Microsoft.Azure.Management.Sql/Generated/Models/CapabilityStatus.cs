@@ -17,19 +17,19 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for RecommendedIndexTypes.
+    /// Defines values for CapabilityStatus.
     /// </summary>
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum RecommendedIndexTypes
+    public enum CapabilityStatus
     {
-        [EnumMember(Value = "CLUSTERED")]
-        CLUSTERED,
-        [EnumMember(Value = "NONCLUSTERED")]
-        NONCLUSTERED,
-        [EnumMember(Value = "COLUMNSTORE")]
-        COLUMNSTORE,
-        [EnumMember(Value = "CLUSTERED COLUMNSTORE")]
-        CLUSTEREDCOLUMNSTORE
+        [EnumMember(Value = "Visible")]
+        Visible,
+        [EnumMember(Value = "Available")]
+        Available,
+        [EnumMember(Value = "Default")]
+        Default,
+        [EnumMember(Value = "Disabled")]
+        Disabled
     }
 }
 

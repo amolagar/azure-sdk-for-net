@@ -12,36 +12,42 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Management;
     using Sql;
     using Rest;
+    using Rest.Serialization;
     using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
-    /// Export database parameters.
+    /// Import database parameters.
     /// </summary>
-    public partial class ExportRequestParameters
+    [JsonTransformation]
+    public partial class ImportExtensionRequest
     {
         /// <summary>
-        /// Initializes a new instance of the ExportRequestParameters class.
+        /// Initializes a new instance of the ImportExtensionRequest class.
         /// </summary>
-        public ExportRequestParameters() { }
+        public ImportExtensionRequest() { }
 
         /// <summary>
-        /// Initializes a new instance of the ExportRequestParameters class.
+        /// Initializes a new instance of the ImportExtensionRequest class.
         /// </summary>
         /// <param name="storageKeyType">The type of the storage key to use.
-        /// Valid values are StorageAccessKey and SharedAccessKey. Possible
-        /// values include: 'StorageAccessKey', 'SharedAccessKey'</param>
-        /// <param name="storageKey">The storage key to use.</param>
+        /// Possible values include: 'StorageAccessKey',
+        /// 'SharedAccessKey'</param>
+        /// <param name="storageKey">The storage key to use.  If storage key
+        /// type is SharedAccessKey, it must be preceded with a "?."</param>
         /// <param name="storageUri">The storage uri to use.</param>
         /// <param name="administratorLogin">The name of the SQL
         /// administrator.</param>
         /// <param name="administratorLoginPassword">The password of the SQL
         /// administrator.</param>
-        /// <param name="authenticationType">The authentication type - if not
-        /// specified, will default to SQL. Possible values include: 'SQL',
-        /// 'ADPassword'</param>
-        public ExportRequestParameters(StorageKeyType storageKeyType, string storageKey, string storageUri, string administratorLogin, string administratorLoginPassword, AuthenticationType? authenticationType = default(AuthenticationType?))
+        /// <param name="name">The name of the extension.</param>
+        /// <param name="type">The type of the extension.</param>
+        /// <param name="authenticationType">The authentication type. Possible
+        /// values include: 'SQL', 'ADPassword'</param>
+        public ImportExtensionRequest(StorageKeyType storageKeyType, string storageKey, string storageUri, string administratorLogin, string administratorLoginPassword, string name = default(string), string type = default(string), AuthenticationType? authenticationType = default(AuthenticationType?))
         {
+            Name = name;
+            Type = type;
             StorageKeyType = storageKeyType;
             StorageKey = storageKey;
             StorageUri = storageUri;
@@ -49,45 +55,71 @@ namespace Microsoft.Azure.Management.Sql.Models
             AdministratorLoginPassword = administratorLoginPassword;
             AuthenticationType = authenticationType;
         }
+        /// <summary>
+        /// Static constructor for ImportExtensionRequest class.
+        /// </summary>
+        static ImportExtensionRequest()
+        {
+            OperationMode = "Import";
+        }
 
         /// <summary>
-        /// Gets or sets the type of the storage key to use. Valid values are
-        /// StorageAccessKey and SharedAccessKey. Possible values include:
-        /// 'StorageAccessKey', 'SharedAccessKey'
+        /// Gets or sets the name of the extension.
         /// </summary>
-        [JsonProperty(PropertyName = "storageKeyType")]
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the extension.
+        /// </summary>
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the storage key to use. Possible values
+        /// include: 'StorageAccessKey', 'SharedAccessKey'
+        /// </summary>
+        [JsonProperty(PropertyName = "properties.storageKeyType")]
         public StorageKeyType StorageKeyType { get; set; }
 
         /// <summary>
-        /// Gets or sets the storage key to use.
+        /// Gets or sets the storage key to use.  If storage key type is
+        /// SharedAccessKey, it must be preceded with a "?."
         /// </summary>
-        [JsonProperty(PropertyName = "storageKey")]
+        [JsonProperty(PropertyName = "properties.storageKey")]
         public string StorageKey { get; set; }
 
         /// <summary>
         /// Gets or sets the storage uri to use.
         /// </summary>
-        [JsonProperty(PropertyName = "storageUri")]
+        [JsonProperty(PropertyName = "properties.storageUri")]
         public string StorageUri { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the SQL administrator.
         /// </summary>
-        [JsonProperty(PropertyName = "administratorLogin")]
+        [JsonProperty(PropertyName = "properties.administratorLogin")]
         public string AdministratorLogin { get; set; }
 
         /// <summary>
         /// Gets or sets the password of the SQL administrator.
         /// </summary>
-        [JsonProperty(PropertyName = "administratorLoginPassword")]
+        [JsonProperty(PropertyName = "properties.administratorLoginPassword")]
         public string AdministratorLoginPassword { get; set; }
 
         /// <summary>
-        /// Gets or sets the authentication type - if not specified, will
-        /// default to SQL. Possible values include: 'SQL', 'ADPassword'
+        /// Gets or sets the authentication type. Possible values include:
+        /// 'SQL', 'ADPassword'
         /// </summary>
-        [JsonProperty(PropertyName = "authenticationType")]
+        [JsonProperty(PropertyName = "properties.authenticationType")]
         public AuthenticationType? AuthenticationType { get; set; }
+
+        /// <summary>
+        /// The type of import operation being performed. This is always
+        /// Import.
+        /// </summary>
+        [JsonProperty(PropertyName = "properties.operationMode")]
+        public static string OperationMode { get; private set; }
 
         /// <summary>
         /// Validate the object.

@@ -14,15 +14,13 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Rest;
     using Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Represents the activity on an elastic pool.
     /// </summary>
     [JsonTransformation]
-    public partial class ElasticPoolActivity : Resource
+    public partial class ElasticPoolActivity : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the ElasticPoolActivity class.
@@ -32,11 +30,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the ElasticPoolActivity class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
+        /// <param name="location">The geo-location where the resource
+        /// lives</param>
         /// <param name="endTime">The time the operation finished (ISO8601
         /// format).</param>
         /// <param name="errorCode">The error code if available.</param>
@@ -71,9 +69,10 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// DTU cap.</param>
         /// <param name="requestedDtuGuarantee">The requested DTU
         /// guarantee.</param>
-        public ElasticPoolActivity(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), System.DateTime? endTime = default(System.DateTime?), int? errorCode = default(int?), string errorMessage = default(string), int? errorSeverity = default(int?), string operation = default(string), string operationId = default(string), int? percentComplete = default(int?), int? requestedDatabaseDtuMax = default(int?), int? requestedDatabaseDtuMin = default(int?), int? requestedDtu = default(int?), string requestedElasticPoolName = default(string), long? requestedStorageLimitInGB = default(long?), string elasticPoolName = default(string), string serverName = default(string), System.DateTime? startTime = default(System.DateTime?), string state = default(string), int? requestedStorageLimitInMB = default(int?), int? requestedDatabaseDtuGuarantee = default(int?), int? requestedDatabaseDtuCap = default(int?), int? requestedDtuGuarantee = default(int?))
-            : base(location, name, id, type, tags)
+        public ElasticPoolActivity(string id = default(string), string name = default(string), string type = default(string), string location = default(string), System.DateTime? endTime = default(System.DateTime?), int? errorCode = default(int?), string errorMessage = default(string), int? errorSeverity = default(int?), string operation = default(string), System.Guid? operationId = default(System.Guid?), int? percentComplete = default(int?), int? requestedDatabaseDtuMax = default(int?), int? requestedDatabaseDtuMin = default(int?), int? requestedDtu = default(int?), string requestedElasticPoolName = default(string), long? requestedStorageLimitInGB = default(long?), string elasticPoolName = default(string), string serverName = default(string), System.DateTime? startTime = default(System.DateTime?), string state = default(string), int? requestedStorageLimitInMB = default(int?), int? requestedDatabaseDtuGuarantee = default(int?), int? requestedDatabaseDtuCap = default(int?), int? requestedDtuGuarantee = default(int?))
+            : base(id, name, type)
         {
+            Location = location;
             EndTime = endTime;
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
@@ -95,6 +94,12 @@ namespace Microsoft.Azure.Management.Sql.Models
             RequestedDatabaseDtuCap = requestedDatabaseDtuCap;
             RequestedDtuGuarantee = requestedDtuGuarantee;
         }
+
+        /// <summary>
+        /// Gets or sets the geo-location where the resource lives
+        /// </summary>
+        [JsonProperty(PropertyName = "location")]
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets the time the operation finished (ISO8601 format).
@@ -130,7 +135,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// Gets the unique operation ID.
         /// </summary>
         [JsonProperty(PropertyName = "properties.operationId")]
-        public string OperationId { get; protected set; }
+        public System.Guid? OperationId { get; protected set; }
 
         /// <summary>
         /// Gets the percentage complete if available.
@@ -216,16 +221,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         [JsonProperty(PropertyName = "properties.requestedDtuGuarantee")]
         public int? RequestedDtuGuarantee { get; protected set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }
 

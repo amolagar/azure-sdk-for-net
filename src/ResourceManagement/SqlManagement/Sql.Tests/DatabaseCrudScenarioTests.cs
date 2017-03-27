@@ -31,7 +31,7 @@ namespace Sql.Tests
                 string dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 var db1 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, new Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                 });
                 Assert.NotNull(db1);
 
@@ -40,7 +40,7 @@ namespace Sql.Tests
                 dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 var db2Input = new Microsoft.Azure.Management.Sql.Models.Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     Collation = SqlTestConstants.DefaultCollation,
                     Edition = SqlTestConstants.DefaultDatabaseEdition,
                     MaxSizeBytes = (2 * 1024L * 1024L * 1024L).ToString(),
@@ -59,7 +59,7 @@ namespace Sql.Tests
                 dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 var db3Input = new Microsoft.Azure.Management.Sql.Models.Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     RequestedServiceObjectiveId = ServiceObjectiveId.Basic,
                     Tags = tags,
                 };
@@ -72,7 +72,7 @@ namespace Sql.Tests
                 dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 var db4Input = new Microsoft.Azure.Management.Sql.Models.Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     RequestedServiceObjectiveName = SqlTestConstants.DefaultDatabaseEdition,
                     Tags = tags,
                 };
@@ -85,7 +85,7 @@ namespace Sql.Tests
                 dbName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 var db5Input = new Microsoft.Azure.Management.Sql.Models.Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     Edition = SqlTestConstants.DefaultDatabaseEdition,
                     Tags = tags,
                 };
@@ -119,7 +119,7 @@ namespace Sql.Tests
                 //
                 var dbInput = new Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     Collation = SqlTestConstants.DefaultCollation,
                     Edition = SqlTestConstants.DefaultDatabaseEdition,
                     MaxSizeBytes = (2 * 1024L * 1024L * 1024L).ToString(),
@@ -135,9 +135,9 @@ namespace Sql.Tests
                 //
                 var updateEditionAndSloInput = new Database()
                 {
-                    Edition = DatabaseEditions.Standard,
+                    Edition = DatabaseEdition.Standard,
                     RequestedServiceObjectiveName = ServiceObjectiveName.S0,
-                    Location = server.Location
+                    Location = SqlManagementTestUtilities.DefaultLocation
                 };
                 var db2 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, updateEditionAndSloInput);
                 SqlManagementTestUtilities.ValidateDatabase(updateEditionAndSloInput, db2, dbName);
@@ -148,7 +148,7 @@ namespace Sql.Tests
                 {
                     Edition = SqlTestConstants.DefaultDatabaseEdition,
                     RequestedServiceObjectiveId = ServiceObjectiveId.Basic,
-                    Location = server.Location
+                    Location = SqlManagementTestUtilities.DefaultLocation
                 };
                 var db3 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, updateEditionAndSloInput2);
                 SqlManagementTestUtilities.ValidateDatabase(updateEditionAndSloInput2, db3, dbName);
@@ -157,8 +157,8 @@ namespace Sql.Tests
                 //
                 var updateEditionInput = new Database()
                 {
-                    Edition = DatabaseEditions.Premium,
-                    Location = server.Location
+                    Edition = DatabaseEdition.Premium,
+                    Location = SqlManagementTestUtilities.DefaultLocation
                 };
                 var db4 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, updateEditionInput);
                 SqlManagementTestUtilities.ValidateDatabase(updateEditionInput, db4, dbName);
@@ -169,7 +169,7 @@ namespace Sql.Tests
                 {
                     RequestedServiceObjectiveName = ServiceObjectiveName.P2,
                     RequestedServiceObjectiveId = ServiceObjectiveId.P2,
-                    Location = server.Location
+                    Location = SqlManagementTestUtilities.DefaultLocation
                 };
                 var db5 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, updateSloInput2);
                 SqlManagementTestUtilities.ValidateDatabase(updateSloInput2, db5, dbName);
@@ -179,7 +179,7 @@ namespace Sql.Tests
                 var updateMaxSize = new Database()
                 {
                     MaxSizeBytes = (250 * 1024L * 1024L * 1024L).ToString(),
-                    Location = server.Location
+                    Location = SqlManagementTestUtilities.DefaultLocation
                 };
                 var db6 = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, updateMaxSize);
                 SqlManagementTestUtilities.ValidateDatabase(updateMaxSize, db6, dbName);
@@ -202,7 +202,7 @@ namespace Sql.Tests
                     createDbTasks.Add(sqlClient.Databases.CreateOrUpdateAsync(resourceGroup.Name, server.Name, name,
                         new Database()
                         {
-                            Location = server.Location
+                            Location = SqlManagementTestUtilities.DefaultLocation
                         }));
                 }
 
@@ -262,7 +262,7 @@ namespace Sql.Tests
                 string epName = SqlManagementTestUtilities.GenerateName();
                 var epInput = new ElasticPool()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     Edition = SqlTestConstants.DefaultElasticPoolEdition,
                     Tags = tags,
                     Dtu = 100,
@@ -276,7 +276,7 @@ namespace Sql.Tests
                 string dbName = SqlManagementTestUtilities.GenerateName();
                 var dbInput = new Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     ElasticPoolName = epName
                 };
                 sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, dbInput);
@@ -284,7 +284,7 @@ namespace Sql.Tests
                 // Remove the database from the pool
                 dbInput = new Database()
                 {
-                    Location = server.Location,
+                    Location = SqlManagementTestUtilities.DefaultLocation,
                     RequestedServiceObjectiveName = ServiceObjectiveName.Basic
                 };
                 var dbResult = sqlClient.Databases.CreateOrUpdate(resourceGroup.Name, server.Name, dbName, dbInput);

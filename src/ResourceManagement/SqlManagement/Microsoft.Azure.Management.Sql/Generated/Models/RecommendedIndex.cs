@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database recommended index.
     /// </summary>
     [JsonTransformation]
-    public partial class RecommendedIndex : Resource
+    public partial class RecommendedIndex : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the RecommendedIndex class.
@@ -32,11 +32,9 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the RecommendedIndex class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
         /// <param name="action">The proposed index action. You can create a
         /// missing index, drop an unused index, or rebuild an existing index
         /// to improve its performance. Possible values include: 'Create',
@@ -64,8 +62,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// recommended index action.</param>
         /// <param name="reportedImpact">The values reported after index action
         /// is complete.</param>
-        public RecommendedIndex(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), RecommendedIndexActions? action = default(RecommendedIndexActions?), RecommendedIndexStates? state = default(RecommendedIndexStates?), System.DateTime? created = default(System.DateTime?), System.DateTime? lastModified = default(System.DateTime?), RecommendedIndexTypes? indexType = default(RecommendedIndexTypes?), string schema = default(string), string table = default(string), IList<string> columns = default(IList<string>), IList<string> includedColumns = default(IList<string>), string indexScript = default(string), IList<OperationImpact> estimatedImpact = default(IList<OperationImpact>), IList<OperationImpact> reportedImpact = default(IList<OperationImpact>))
-            : base(location, name, id, type, tags)
+        public RecommendedIndex(string id = default(string), string name = default(string), string type = default(string), RecommendedIndexAction? action = default(RecommendedIndexAction?), RecommendedIndexState? state = default(RecommendedIndexState?), System.DateTime? created = default(System.DateTime?), System.DateTime? lastModified = default(System.DateTime?), RecommendedIndexType? indexType = default(RecommendedIndexType?), string schema = default(string), string table = default(string), IList<string> columns = default(IList<string>), IList<string> includedColumns = default(IList<string>), string indexScript = default(string), IList<OperationImpact> estimatedImpact = default(IList<OperationImpact>), IList<OperationImpact> reportedImpact = default(IList<OperationImpact>))
+            : base(id, name, type)
         {
             Action = action;
             State = state;
@@ -87,7 +85,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// performance. Possible values include: 'Create', 'Drop', 'Rebuild'
         /// </summary>
         [JsonProperty(PropertyName = "properties.action")]
-        public RecommendedIndexActions? Action { get; protected set; }
+        public RecommendedIndexAction? Action { get; protected set; }
 
         /// <summary>
         /// Gets the current recommendation state. Possible values include:
@@ -95,7 +93,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// 'Reverting', 'Reverted', 'Ignored', 'Expired', 'Blocked', 'Success'
         /// </summary>
         [JsonProperty(PropertyName = "properties.state")]
-        public RecommendedIndexStates? State { get; protected set; }
+        public RecommendedIndexState? State { get; protected set; }
 
         /// <summary>
         /// Gets the UTC datetime showing when this resource was created
@@ -117,7 +115,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// 'NONCLUSTERED', 'COLUMNSTORE', 'CLUSTERED COLUMNSTORE'
         /// </summary>
         [JsonProperty(PropertyName = "properties.indexType")]
-        public RecommendedIndexTypes? IndexType { get; protected set; }
+        public RecommendedIndexType? IndexType { get; protected set; }
 
         /// <summary>
         /// Gets the schema where table to build index over resides
@@ -161,16 +159,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         [JsonProperty(PropertyName = "properties.reportedImpact")]
         public IList<OperationImpact> ReportedImpact { get; protected set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }
 

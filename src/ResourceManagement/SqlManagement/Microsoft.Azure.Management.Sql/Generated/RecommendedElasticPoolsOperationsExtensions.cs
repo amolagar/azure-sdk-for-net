@@ -138,9 +138,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            public static IEnumerable<RecommendedElasticPool> List(this IRecommendedElasticPoolsOperations operations, string resourceGroupName, string serverName)
+            public static IEnumerable<RecommendedElasticPool> ListByServer(this IRecommendedElasticPoolsOperations operations, string resourceGroupName, string serverName)
             {
-                return operations.ListAsync(resourceGroupName, serverName).GetAwaiter().GetResult();
+                return operations.ListByServerAsync(resourceGroupName, serverName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -159,9 +159,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IEnumerable<RecommendedElasticPool>> ListAsync(this IRecommendedElasticPoolsOperations operations, string resourceGroupName, string serverName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IEnumerable<RecommendedElasticPool>> ListByServerAsync(this IRecommendedElasticPoolsOperations operations, string resourceGroupName, string serverName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ListWithHttpMessagesAsync(resourceGroupName, serverName, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ListByServerWithHttpMessagesAsync(resourceGroupName, serverName, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

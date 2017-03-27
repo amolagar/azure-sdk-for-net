@@ -17,15 +17,19 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for TableType.
+    /// Defines values for RecommendedIndexType.
     /// </summary>
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum TableType
+    public enum RecommendedIndexType
     {
-        [EnumMember(Value = "BaseTable")]
-        BaseTable,
-        [EnumMember(Value = "View")]
-        View
+        [EnumMember(Value = "CLUSTERED")]
+        CLUSTERED,
+        [EnumMember(Value = "NONCLUSTERED")]
+        NONCLUSTERED,
+        [EnumMember(Value = "COLUMNSTORE")]
+        COLUMNSTORE,
+        [EnumMember(Value = "CLUSTERED COLUMNSTORE")]
+        CLUSTEREDCOLUMNSTORE
     }
 }
 

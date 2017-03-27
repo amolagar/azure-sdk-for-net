@@ -17,15 +17,13 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for TransparentDataEncryptionStates.
+    /// Defines values for PerformanceLevelUnit.
     /// </summary>
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum TransparentDataEncryptionStates
+    public enum PerformanceLevelUnit
     {
-        [EnumMember(Value = "Enabled")]
-        Enabled,
-        [EnumMember(Value = "Disabled")]
-        Disabled
+        [EnumMember(Value = "DTU")]
+        DTU
     }
 }
 

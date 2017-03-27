@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a recommented elastic pool.
     /// </summary>
     [JsonTransformation]
-    public partial class RecommendedElasticPool : Resource
+    public partial class RecommendedElasticPool : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the RecommendedElasticPool class.
@@ -32,13 +32,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the RecommendedElasticPool class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
         /// <param name="databaseEdition">The edition of the recommended
-        /// elastic pool. The ElasticPoolEditions enumeration contains all the
+        /// elastic pool. The ElasticPoolEdition enumeration contains all the
         /// valid editions. Possible values include: 'Basic', 'Standard',
         /// 'Premium'</param>
         /// <param name="dtu">The DTU for the recommended elastic pool.</param>
@@ -58,8 +56,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// Expanded property</param>
         /// <param name="metrics">The list of databases housed in the server.
         /// Expanded property</param>
-        public RecommendedElasticPool(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string databaseEdition = default(string), double? dtu = default(double?), double? databaseDtuMin = default(double?), double? databaseDtuMax = default(double?), double? storageMB = default(double?), System.DateTime? observationPeriodStart = default(System.DateTime?), System.DateTime? observationPeriodEnd = default(System.DateTime?), double? maxObservedDtu = default(double?), double? maxObservedStorageMB = default(double?), IList<Database> databasesProperty = default(IList<Database>), IList<RecommendedElasticPoolMetric> metrics = default(IList<RecommendedElasticPoolMetric>))
-            : base(location, name, id, type, tags)
+        public RecommendedElasticPool(string id = default(string), string name = default(string), string type = default(string), string databaseEdition = default(string), double? dtu = default(double?), double? databaseDtuMin = default(double?), double? databaseDtuMax = default(double?), double? storageMB = default(double?), System.DateTime? observationPeriodStart = default(System.DateTime?), System.DateTime? observationPeriodEnd = default(System.DateTime?), double? maxObservedDtu = default(double?), double? maxObservedStorageMB = default(double?), IList<Database> databasesProperty = default(IList<Database>), IList<RecommendedElasticPoolMetric> metrics = default(IList<RecommendedElasticPoolMetric>))
+            : base(id, name, type)
         {
             DatabaseEdition = databaseEdition;
             Dtu = dtu;
@@ -76,7 +74,7 @@ namespace Microsoft.Azure.Management.Sql.Models
 
         /// <summary>
         /// Gets the edition of the recommended elastic pool. The
-        /// ElasticPoolEditions enumeration contains all the valid editions.
+        /// ElasticPoolEdition enumeration contains all the valid editions.
         /// Possible values include: 'Basic', 'Standard', 'Premium'
         /// </summary>
         [JsonProperty(PropertyName = "properties.databaseEdition")]
@@ -142,26 +140,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         [JsonProperty(PropertyName = "properties.metrics")]
         public IList<RecommendedElasticPoolMetric> Metrics { get; protected set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-            if (DatabasesProperty != null)
-            {
-                foreach (var element in DatabasesProperty)
-                {
-                    if (element != null)
-                    {
-                        element.Validate();
-                    }
-                }
-            }
-        }
     }
 }
 

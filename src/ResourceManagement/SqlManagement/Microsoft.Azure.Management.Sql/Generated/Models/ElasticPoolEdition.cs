@@ -11,23 +11,15 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Azure;
     using Management;
     using Sql;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime;
-    using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for TargetElasticPoolEditions.
+    /// Defines values for ElasticPoolEdition.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum TargetElasticPoolEditions
+    public static class ElasticPoolEdition
     {
-        [EnumMember(Value = "Basic")]
-        Basic,
-        [EnumMember(Value = "Standard")]
-        Standard,
-        [EnumMember(Value = "Premium")]
-        Premium
+        public const string Basic = "Basic";
+        public const string Standard = "Standard";
+        public const string Premium = "Premium";
     }
 }
 

@@ -17,7 +17,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// <summary>
     /// Represents database metrics.
     /// </summary>
-    public partial class DatabaseMetric : SqlSubResource
+    public partial class DatabaseMetric : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the DatabaseMetric class.

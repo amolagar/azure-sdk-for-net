@@ -14,15 +14,13 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Rest;
     using Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Represents the activity on an elastic pool.
     /// </summary>
     [JsonTransformation]
-    public partial class ElasticPoolDatabaseActivity : Resource
+    public partial class ElasticPoolDatabaseActivity : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the ElasticPoolDatabaseActivity
@@ -34,11 +32,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// Initializes a new instance of the ElasticPoolDatabaseActivity
         /// class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
+        /// <param name="location">The geo-location where the resource
+        /// lives</param>
         /// <param name="databaseName">The database name.</param>
         /// <param name="endTime">The time the operation finished (ISO8601
         /// format).</param>
@@ -63,9 +61,10 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="startTime">The time the operation started (ISO8601
         /// format).</param>
         /// <param name="state">The current state of the operation.</param>
-        public ElasticPoolDatabaseActivity(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string databaseName = default(string), System.DateTime? endTime = default(System.DateTime?), int? errorCode = default(int?), string errorMessage = default(string), int? errorSeverity = default(int?), string operation = default(string), string operationId = default(string), int? percentComplete = default(int?), string requestedElasticPoolName = default(string), string currentElasticPoolName = default(string), string currentServiceObjective = default(string), string requestedServiceObjective = default(string), string serverName = default(string), System.DateTime? startTime = default(System.DateTime?), string state = default(string))
-            : base(location, name, id, type, tags)
+        public ElasticPoolDatabaseActivity(string id = default(string), string name = default(string), string type = default(string), string location = default(string), string databaseName = default(string), System.DateTime? endTime = default(System.DateTime?), int? errorCode = default(int?), string errorMessage = default(string), int? errorSeverity = default(int?), string operation = default(string), System.Guid? operationId = default(System.Guid?), int? percentComplete = default(int?), string requestedElasticPoolName = default(string), string currentElasticPoolName = default(string), string currentServiceObjective = default(string), string requestedServiceObjective = default(string), string serverName = default(string), System.DateTime? startTime = default(System.DateTime?), string state = default(string))
+            : base(id, name, type)
         {
+            Location = location;
             DatabaseName = databaseName;
             EndTime = endTime;
             ErrorCode = errorCode;
@@ -82,6 +81,12 @@ namespace Microsoft.Azure.Management.Sql.Models
             StartTime = startTime;
             State = state;
         }
+
+        /// <summary>
+        /// Gets or sets the geo-location where the resource lives
+        /// </summary>
+        [JsonProperty(PropertyName = "location")]
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets the database name.
@@ -123,7 +128,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// Gets the unique operation ID.
         /// </summary>
         [JsonProperty(PropertyName = "properties.operationId")]
-        public string OperationId { get; protected set; }
+        public System.Guid? OperationId { get; protected set; }
 
         /// <summary>
         /// Gets the percentage complete if available.
@@ -175,16 +180,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         [JsonProperty(PropertyName = "properties.state")]
         public string State { get; protected set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-        }
     }
 }
 

@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database elastic pool.
     /// </summary>
     [JsonTransformation]
-    public partial class ElasticPool : Resource
+    public partial class ElasticPool : TrackedResource
     {
         /// <summary>
         /// Initializes a new instance of the ElasticPool class.
@@ -32,11 +32,11 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <summary>
         /// Initializes a new instance of the ElasticPool class.
         /// </summary>
-        /// <param name="location">Resource location</param>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">Resource ID</param>
-        /// <param name="type">Resource type</param>
-        /// <param name="tags">Resource tags</param>
+        /// <param name="location">Resource location.</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
+        /// <param name="tags">Resource tags.</param>
         /// <param name="creationDate">The creation date of the elastic pool
         /// (ISO8601 format).</param>
         /// <param name="state">The state of the elastic pool. Possible values
@@ -53,8 +53,8 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// pool in MB.</param>
         /// <param name="kind">Kind of elastic pool.  This is metadata used for
         /// the Azure portal experience.</param>
-        public ElasticPool(string location, string name = default(string), string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), System.DateTime? creationDate = default(System.DateTime?), string state = default(string), string edition = default(string), int? dtu = default(int?), int? databaseDtuMax = default(int?), int? databaseDtuMin = default(int?), int? storageMB = default(int?), string kind = default(string))
-            : base(location, name, id, type, tags)
+        public ElasticPool(string location, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), System.DateTime? creationDate = default(System.DateTime?), string state = default(string), string edition = default(string), int? dtu = default(int?), int? databaseDtuMax = default(int?), int? databaseDtuMin = default(int?), int? storageMB = default(int?), string kind = default(string))
+            : base(location, id, name, type, tags)
         {
             CreationDate = creationDate;
             State = state;

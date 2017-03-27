@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database transparent data encryption Scan.
     /// </summary>
     [JsonTransformation]
-    public partial class TransparentDataEncryptionActivity : SqlSubResource
+    public partial class TransparentDataEncryptionActivity : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the TransparentDataEncryptionActivity

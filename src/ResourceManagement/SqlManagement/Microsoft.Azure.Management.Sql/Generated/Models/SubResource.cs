@@ -17,19 +17,19 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// <summary>
     /// Subresource properties
     /// </summary>
-    public partial class SqlSubResource
+    public partial class SubResource
     {
         /// <summary>
-        /// Initializes a new instance of the SqlSubResource class.
+        /// Initializes a new instance of the SubResource class.
         /// </summary>
-        public SqlSubResource() { }
+        public SubResource() { }
 
         /// <summary>
-        /// Initializes a new instance of the SqlSubResource class.
+        /// Initializes a new instance of the SubResource class.
         /// </summary>
         /// <param name="name">Resource name</param>
         /// <param name="id">The resource ID.</param>
-        public SqlSubResource(string name = default(string), string id = default(string))
+        public SubResource(string name = default(string), string id = default(string))
         {
             Name = name;
             Id = id;

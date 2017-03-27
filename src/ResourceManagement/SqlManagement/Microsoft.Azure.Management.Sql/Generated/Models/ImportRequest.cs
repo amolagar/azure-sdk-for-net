@@ -18,20 +18,21 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// <summary>
     /// Import database parameters.
     /// </summary>
-    public partial class ImportRequestParameters : ExportRequestParameters
+    public partial class ImportRequest : ExportRequest
     {
         /// <summary>
-        /// Initializes a new instance of the ImportRequestParameters class.
+        /// Initializes a new instance of the ImportRequest class.
         /// </summary>
-        public ImportRequestParameters() { }
+        public ImportRequest() { }
 
         /// <summary>
-        /// Initializes a new instance of the ImportRequestParameters class.
+        /// Initializes a new instance of the ImportRequest class.
         /// </summary>
         /// <param name="storageKeyType">The type of the storage key to use.
-        /// Valid values are StorageAccessKey and SharedAccessKey. Possible
-        /// values include: 'StorageAccessKey', 'SharedAccessKey'</param>
-        /// <param name="storageKey">The storage key to use.</param>
+        /// Possible values include: 'StorageAccessKey',
+        /// 'SharedAccessKey'</param>
+        /// <param name="storageKey">The storage key to use.  If storage key
+        /// type is SharedAccessKey, it must be preceded with a "?."</param>
         /// <param name="storageUri">The storage uri to use.</param>
         /// <param name="administratorLogin">The name of the SQL
         /// administrator.</param>
@@ -39,16 +40,19 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// administrator.</param>
         /// <param name="databaseName">The name of the database to
         /// import.</param>
-        /// <param name="edition">The edition for the database being
-        /// created.</param>
+        /// <param name="edition">The edition for the database being created.
+        /// Possible values include: 'Web', 'Business', 'Basic', 'Standard',
+        /// 'Premium', 'Free', 'Stretch', 'DataWarehouse', 'System',
+        /// 'System2'</param>
         /// <param name="serviceObjectiveName">The name of the service
-        /// objective to assign to the database.</param>
+        /// objective to assign to the database. Possible values include:
+        /// 'Basic', 'S0', 'S1', 'S2', 'S3', 'P1', 'P2', 'P3', 'P4', 'P6',
+        /// 'P11', 'P15', 'System', 'System2', 'ElasticPool'</param>
         /// <param name="maxSizeBytes">The maximum size for the newly imported
         /// database.</param>
-        /// <param name="authenticationType">The authentication type - if not
-        /// specified, will default to SQL. Possible values include: 'SQL',
-        /// 'ADPassword'</param>
-        public ImportRequestParameters(StorageKeyType storageKeyType, string storageKey, string storageUri, string administratorLogin, string administratorLoginPassword, string databaseName, string edition, string serviceObjectiveName, string maxSizeBytes, AuthenticationType? authenticationType = default(AuthenticationType?))
+        /// <param name="authenticationType">The authentication type. Possible
+        /// values include: 'SQL', 'ADPassword'</param>
+        public ImportRequest(StorageKeyType storageKeyType, string storageKey, string storageUri, string administratorLogin, string administratorLoginPassword, string databaseName, string edition, string serviceObjectiveName, string maxSizeBytes, AuthenticationType? authenticationType = default(AuthenticationType?))
             : base(storageKeyType, storageKey, storageUri, administratorLogin, administratorLoginPassword, authenticationType)
         {
             DatabaseName = databaseName;
@@ -64,14 +68,18 @@ namespace Microsoft.Azure.Management.Sql.Models
         public string DatabaseName { get; set; }
 
         /// <summary>
-        /// Gets or sets the edition for the database being created.
+        /// Gets or sets the edition for the database being created. Possible
+        /// values include: 'Web', 'Business', 'Basic', 'Standard', 'Premium',
+        /// 'Free', 'Stretch', 'DataWarehouse', 'System', 'System2'
         /// </summary>
         [JsonProperty(PropertyName = "edition")]
         public string Edition { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the service objective to assign to the
-        /// database.
+        /// database. Possible values include: 'Basic', 'S0', 'S1', 'S2', 'S3',
+        /// 'P1', 'P2', 'P3', 'P4', 'P6', 'P11', 'P15', 'System', 'System2',
+        /// 'ElasticPool'
         /// </summary>
         [JsonProperty(PropertyName = "serviceObjectiveName")]
         public string ServiceObjectiveName { get; set; }

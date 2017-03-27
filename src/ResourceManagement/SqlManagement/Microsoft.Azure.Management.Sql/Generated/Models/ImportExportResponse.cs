@@ -20,21 +20,19 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Response for Import/Export Get operation.
     /// </summary>
     [JsonTransformation]
-    public partial class ImportExportOperationResponse
+    public partial class ImportExportResponse : ProxyResource
     {
         /// <summary>
-        /// Initializes a new instance of the ImportExportOperationResponse
-        /// class.
+        /// Initializes a new instance of the ImportExportResponse class.
         /// </summary>
-        public ImportExportOperationResponse() { }
+        public ImportExportResponse() { }
 
         /// <summary>
-        /// Initializes a new instance of the ImportExportOperationResponse
-        /// class.
+        /// Initializes a new instance of the ImportExportResponse class.
         /// </summary>
-        /// <param name="id">The id returned from the server.</param>
-        /// <param name="name">The name returned from the server.</param>
-        /// <param name="type">The type returned from the server.</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
         /// <param name="requestType">The request type of the
         /// operation.</param>
         /// <param name="requestId">The request type of the operation.</param>
@@ -48,11 +46,9 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="blobUri">The blob uri.</param>
         /// <param name="errorMessage">The error message returned from the
         /// server.</param>
-        public ImportExportOperationResponse(string id = default(string), string name = default(string), string type = default(string), string requestType = default(string), System.Guid? requestId = default(System.Guid?), string serverName = default(string), string databaseName = default(string), string status = default(string), string lastModifiedTime = default(string), string queuedTime = default(string), string blobUri = default(string), string errorMessage = default(string))
+        public ImportExportResponse(string id = default(string), string name = default(string), string type = default(string), string requestType = default(string), System.Guid? requestId = default(System.Guid?), string serverName = default(string), string databaseName = default(string), string status = default(string), string lastModifiedTime = default(string), string queuedTime = default(string), string blobUri = default(string), string errorMessage = default(string))
+            : base(id, name, type)
         {
-            Id = id;
-            Name = name;
-            Type = type;
             RequestType = requestType;
             RequestId = requestId;
             ServerName = serverName;
@@ -63,24 +59,6 @@ namespace Microsoft.Azure.Management.Sql.Models
             BlobUri = blobUri;
             ErrorMessage = errorMessage;
         }
-
-        /// <summary>
-        /// Gets the id returned from the server.
-        /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
-
-        /// <summary>
-        /// Gets the name returned from the server.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
-
-        /// <summary>
-        /// Gets the type returned from the server.
-        /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
 
         /// <summary>
         /// Gets the request type of the operation.

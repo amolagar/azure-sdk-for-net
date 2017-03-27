@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database transparent data encryption .
     /// </summary>
     [JsonTransformation]
-    public partial class TransparentDataEncryption : SqlSubResource
+    public partial class TransparentDataEncryption : SubResource
     {
         /// <summary>
         /// Initializes a new instance of the TransparentDataEncryption class.
@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="id">The resource ID.</param>
         /// <param name="status">The status of the database transparent data
         /// encryption. Possible values include: 'Enabled', 'Disabled'</param>
-        public TransparentDataEncryption(string name = default(string), string id = default(string), TransparentDataEncryptionStates? status = default(TransparentDataEncryptionStates?))
+        public TransparentDataEncryption(string name = default(string), string id = default(string), TransparentDataEncryptionStatus? status = default(TransparentDataEncryptionStatus?))
             : base(name, id)
         {
             Status = status;
@@ -45,7 +45,7 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// encryption. Possible values include: 'Enabled', 'Disabled'
         /// </summary>
         [JsonProperty(PropertyName = "properties.status")]
-        public TransparentDataEncryptionStates? Status { get; set; }
+        public TransparentDataEncryptionStatus? Status { get; set; }
 
     }
 }

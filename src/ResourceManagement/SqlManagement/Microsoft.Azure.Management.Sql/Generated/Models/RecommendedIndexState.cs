@@ -17,10 +17,10 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for RecommendedIndexStates.
+    /// Defines values for RecommendedIndexState.
     /// </summary>
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum RecommendedIndexStates
+    public enum RecommendedIndexState
     {
         [EnumMember(Value = "Active")]
         Active,

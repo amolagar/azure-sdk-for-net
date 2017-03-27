@@ -17,17 +17,15 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for RecommendedIndexActions.
+    /// Defines values for SecurityAlertPolicyEmailAccountAdmins.
     /// </summary>
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum RecommendedIndexActions
+    public enum SecurityAlertPolicyEmailAccountAdmins
     {
-        [EnumMember(Value = "Create")]
-        Create,
-        [EnumMember(Value = "Drop")]
-        Drop,
-        [EnumMember(Value = "Rebuild")]
-        Rebuild
+        [EnumMember(Value = "Enabled")]
+        Enabled,
+        [EnumMember(Value = "Disabled")]
+        Disabled
     }
 }
 

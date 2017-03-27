@@ -11,14 +11,21 @@ namespace Microsoft.Azure.Management.Sql.Models
     using Azure;
     using Management;
     using Sql;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     /// <summary>
-    /// Defines values for TransparentDataEncryptionActivityStates.
+    /// Defines values for SecurityAlertPolicyUseServerDefault.
     /// </summary>
-    public static class TransparentDataEncryptionActivityStates
+    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    public enum SecurityAlertPolicyUseServerDefault
     {
-        public const string Encrypting = "Encrypting";
-        public const string Decrypting = "Decrypting";
+        [EnumMember(Value = "Enabled")]
+        Enabled,
+        [EnumMember(Value = "Disabled")]
+        Disabled
     }
 }
 
