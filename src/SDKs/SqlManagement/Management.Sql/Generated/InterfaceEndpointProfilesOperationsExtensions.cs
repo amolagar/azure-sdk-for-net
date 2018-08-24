@@ -17,12 +17,12 @@ namespace Microsoft.Azure.Management.Sql
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for BackupShortTermRetentionPoliciesOperations.
+    /// Extension methods for InterfaceEndpointProfilesOperations.
     /// </summary>
-    public static partial class BackupShortTermRetentionPoliciesOperationsExtensions
+    public static partial class InterfaceEndpointProfilesOperationsExtensions
     {
             /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Gets a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -34,16 +34,16 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
+            /// The name of the interface endpoint profile.
             /// </param>
-            public static BackupShortTermRetentionPolicy Get(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            public static InterfaceEndpointProfile Get(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName)
             {
-                return operations.GetAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                return operations.GetAsync(resourceGroupName, serverName, interfaceEndpointProfileName).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Gets a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -55,22 +55,22 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
+            /// The name of the interface endpoint profile.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<BackupShortTermRetentionPolicy> GetAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<InterfaceEndpointProfile> GetAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Creates or updates a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -82,19 +82,17 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
             /// <param name='parameters'>
-            /// The short term retention policy info.
             /// </param>
-            public static BackupShortTermRetentionPolicy CreateOrUpdate(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters)
+            public static InterfaceEndpointProfile CreateOrUpdate(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters)
             {
-                return operations.CreateOrUpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+                return operations.CreateOrUpdateAsync(resourceGroupName, serverName, interfaceEndpointProfileName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Creates or updates a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,25 +104,23 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
             /// <param name='parameters'>
-            /// The short term retention policy info.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<BackupShortTermRetentionPolicy> CreateOrUpdateAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<InterfaceEndpointProfile> CreateOrUpdateAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Deletes the interface endpoint profile with the given name.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -136,19 +132,15 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
-            /// </param>
-            public static BackupShortTermRetentionPolicy Update(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters)
+            public static void Delete(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName)
             {
-                return operations.UpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+                operations.DeleteAsync(resourceGroupName, serverName, interfaceEndpointProfileName).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Deletes the interface endpoint profile with the given name.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -160,25 +152,60 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
-            /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<BackupShortTermRetentionPolicy> UpdateAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.UpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
+                (await operations.DeleteWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Gets a list of interface endpoint profiles attached to a server.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            public static IPage<InterfaceEndpointProfile> ListByServer(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName)
+            {
+                return operations.ListByServerAsync(resourceGroupName, serverName).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a list of interface endpoint profiles attached to a server.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group that contains the resource. You can obtain
+            /// this value from the Azure Resource Manager API or the portal.
+            /// </param>
+            /// <param name='serverName'>
+            /// The name of the server.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<InterfaceEndpointProfile>> ListByServerAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ListByServerWithHttpMessagesAsync(resourceGroupName, serverName, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Creates or updates a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -190,16 +217,17 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
-            public static IPage<BackupShortTermRetentionPolicy> ListByDatabase(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName)
+            /// <param name='parameters'>
+            /// </param>
+            public static InterfaceEndpointProfile BeginCreateOrUpdate(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters)
             {
-                return operations.ListByDatabaseAsync(resourceGroupName, serverName, databaseName).GetAwaiter().GetResult();
+                return operations.BeginCreateOrUpdateAsync(resourceGroupName, serverName, interfaceEndpointProfileName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Creates or updates a interface endpoint profile.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -211,22 +239,23 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
+            /// </param>
+            /// <param name='parameters'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<BackupShortTermRetentionPolicy>> ListByDatabaseAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<InterfaceEndpointProfile> BeginCreateOrUpdateAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ListByDatabaseWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Deletes the interface endpoint profile with the given name.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -238,19 +267,15 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
-            /// </param>
-            public static BackupShortTermRetentionPolicy BeginCreateOrUpdate(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters)
+            public static void BeginDelete(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName)
             {
-                return operations.BeginCreateOrUpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
+                operations.BeginDeleteAsync(resourceGroupName, serverName, interfaceEndpointProfileName).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
+            /// Deletes the interface endpoint profile with the given name.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -262,79 +287,18 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='serverName'>
             /// The name of the server.
             /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
-            /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
+            /// <param name='interfaceEndpointProfileName'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<BackupShortTermRetentionPolicy> BeginCreateOrUpdateAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task BeginDeleteAsync(this IInterfaceEndpointProfilesOperations operations, string resourceGroupName, string serverName, string interfaceEndpointProfileName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
+                (await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Updates a database's short term retention policy.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='resourceGroupName'>
-            /// The name of the resource group that contains the resource. You can obtain
-            /// this value from the Azure Resource Manager API or the portal.
-            /// </param>
-            /// <param name='serverName'>
-            /// The name of the server.
-            /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
-            /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
-            /// </param>
-            public static BackupShortTermRetentionPolicy BeginUpdate(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters)
-            {
-                return operations.BeginUpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Updates a database's short term retention policy.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='resourceGroupName'>
-            /// The name of the resource group that contains the resource. You can obtain
-            /// this value from the Azure Resource Manager API or the portal.
-            /// </param>
-            /// <param name='serverName'>
-            /// The name of the server.
-            /// </param>
-            /// <param name='databaseName'>
-            /// The name of the database.
-            /// </param>
-            /// <param name='parameters'>
-            /// The short term retention policy info.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<BackupShortTermRetentionPolicy> BeginUpdateAsync(this IBackupShortTermRetentionPoliciesOperations operations, string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Gets a list of interface endpoint profiles attached to a server.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -342,13 +306,13 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static IPage<BackupShortTermRetentionPolicy> ListByDatabaseNext(this IBackupShortTermRetentionPoliciesOperations operations, string nextPageLink)
+            public static IPage<InterfaceEndpointProfile> ListByServerNext(this IInterfaceEndpointProfilesOperations operations, string nextPageLink)
             {
-                return operations.ListByDatabaseNextAsync(nextPageLink).GetAwaiter().GetResult();
+                return operations.ListByServerNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Gets a database's short term retention policy.
+            /// Gets a list of interface endpoint profiles attached to a server.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -359,9 +323,9 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<BackupShortTermRetentionPolicy>> ListByDatabaseNextAsync(this IBackupShortTermRetentionPoliciesOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IPage<InterfaceEndpointProfile>> ListByServerNextAsync(this IInterfaceEndpointProfilesOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ListByDatabaseNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.ListByServerNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

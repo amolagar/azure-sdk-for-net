@@ -1,1 +1,1 @@
-Start-AutoRestCodeGeneration -ResourceProvider "sql/resource-manager" -AutoRestVersion "latest"
+Start-AutoRestCodeGeneration -AutoRestVersion "latest" -SpecsRepoFork vpyvovar -SpecsRepoBranch private_preview -SpecsRepoName azure-rest-api-specs -ResourceProvider "sql/resource-manager"

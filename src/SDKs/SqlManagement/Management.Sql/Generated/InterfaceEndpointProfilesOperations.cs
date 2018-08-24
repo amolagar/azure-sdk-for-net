@@ -23,12 +23,12 @@ namespace Microsoft.Azure.Management.Sql
     using System.Threading.Tasks;
 
     /// <summary>
-    /// BackupShortTermRetentionPoliciesOperations operations.
+    /// InterfaceEndpointProfilesOperations operations.
     /// </summary>
-    internal partial class BackupShortTermRetentionPoliciesOperations : IServiceOperations<SqlManagementClient>, IBackupShortTermRetentionPoliciesOperations
+    internal partial class InterfaceEndpointProfilesOperations : IServiceOperations<SqlManagementClient>, IInterfaceEndpointProfilesOperations
     {
         /// <summary>
-        /// Initializes a new instance of the BackupShortTermRetentionPoliciesOperations class.
+        /// Initializes a new instance of the InterfaceEndpointProfilesOperations class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal BackupShortTermRetentionPoliciesOperations(SqlManagementClient client)
+        internal InterfaceEndpointProfilesOperations(SqlManagementClient client)
         {
             if (client == null)
             {
@@ -51,7 +51,7 @@ namespace Microsoft.Azure.Management.Sql
         public SqlManagementClient Client { get; private set; }
 
         /// <summary>
-        /// Gets a database's short term retention policy.
+        /// Gets a interface endpoint profile.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -60,8 +60,8 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='serverName'>
         /// The name of the server.
         /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
+        /// <param name='interfaceEndpointProfileName'>
+        /// The name of the interface endpoint profile.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -84,7 +84,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<BackupShortTermRetentionPolicy>> GetWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<InterfaceEndpointProfile>> GetWithHttpMessagesAsync(string resourceGroupName, string serverName, string interfaceEndpointProfileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
@@ -94,15 +94,14 @@ namespace Microsoft.Azure.Management.Sql
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "serverName");
             }
-            if (databaseName == null)
+            if (interfaceEndpointProfileName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "databaseName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "interfaceEndpointProfileName");
             }
             if (Client.SubscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.SubscriptionId");
             }
-            string policyName = "default";
             string apiVersion = "2017-10-01-preview";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -113,19 +112,17 @@ namespace Microsoft.Azure.Management.Sql
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("serverName", serverName);
-                tracingParameters.Add("databaseName", databaseName);
-                tracingParameters.Add("policyName", policyName);
+                tracingParameters.Add("interfaceEndpointProfileName", interfaceEndpointProfileName);
                 tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Get", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}").ToString();
+            var _baseUrl = "https://brazilus.management.azure.com/";
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles/{interfaceEndpointProfileName}").ToString();
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{serverName}", System.Uri.EscapeDataString(serverName));
-            _url = _url.Replace("{databaseName}", System.Uri.EscapeDataString(databaseName));
-            _url = _url.Replace("{policyName}", System.Uri.EscapeDataString(policyName));
+            _url = _url.Replace("{interfaceEndpointProfileName}", System.Uri.EscapeDataString(interfaceEndpointProfileName));
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -225,7 +222,7 @@ namespace Microsoft.Azure.Management.Sql
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<BackupShortTermRetentionPolicy>();
+            var _result = new AzureOperationResponse<InterfaceEndpointProfile>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -238,7 +235,7 @@ namespace Microsoft.Azure.Management.Sql
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<BackupShortTermRetentionPolicy>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<InterfaceEndpointProfile>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -258,7 +255,7 @@ namespace Microsoft.Azure.Management.Sql
         }
 
         /// <summary>
-        /// Updates a database's short term retention policy.
+        /// Creates or updates a interface endpoint profile.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -267,11 +264,9 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='serverName'>
         /// The name of the server.
         /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
+        /// <param name='interfaceEndpointProfileName'>
         /// </param>
         /// <param name='parameters'>
-        /// The short term retention policy info.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -279,15 +274,15 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<BackupShortTermRetentionPolicy>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<InterfaceEndpointProfile>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<BackupShortTermRetentionPolicy> _response = await BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<InterfaceEndpointProfile> _response = await BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
             return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Updates a database's short term retention policy.
+        /// Deletes the interface endpoint profile with the given name.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -296,11 +291,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='serverName'>
         /// The name of the server.
         /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
-        /// </param>
-        /// <param name='parameters'>
-        /// The short term retention policy info.
+        /// <param name='interfaceEndpointProfileName'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -308,15 +299,15 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<BackupShortTermRetentionPolicy>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string serverName, string interfaceEndpointProfileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Send Request
-            AzureOperationResponse<BackupShortTermRetentionPolicy> _response = await BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
-            return await Client.GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+            // Send request
+            AzureOperationResponse _response = await BeginDeleteWithHttpMessagesAsync(resourceGroupName, serverName, interfaceEndpointProfileName, customHeaders, cancellationToken).ConfigureAwait(false);
+            return await Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Gets a database's short term retention policy.
+        /// Gets a list of interface endpoint profiles attached to a server.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -324,9 +315,6 @@ namespace Microsoft.Azure.Management.Sql
         /// </param>
         /// <param name='serverName'>
         /// The name of the server.
-        /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -349,7 +337,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IPage<BackupShortTermRetentionPolicy>>> ListByDatabaseWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<InterfaceEndpointProfile>>> ListByServerWithHttpMessagesAsync(string resourceGroupName, string serverName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
@@ -358,10 +346,6 @@ namespace Microsoft.Azure.Management.Sql
             if (serverName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "serverName");
-            }
-            if (databaseName == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "databaseName");
             }
             if (Client.SubscriptionId == null)
             {
@@ -377,17 +361,15 @@ namespace Microsoft.Azure.Management.Sql
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("serverName", serverName);
-                tracingParameters.Add("databaseName", databaseName);
                 tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "ListByDatabase", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ListByServer", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles").ToString();
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{serverName}", System.Uri.EscapeDataString(serverName));
-            _url = _url.Replace("{databaseName}", System.Uri.EscapeDataString(databaseName));
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -487,7 +469,7 @@ namespace Microsoft.Azure.Management.Sql
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<IPage<BackupShortTermRetentionPolicy>>();
+            var _result = new AzureOperationResponse<IPage<InterfaceEndpointProfile>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -500,7 +482,7 @@ namespace Microsoft.Azure.Management.Sql
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<BackupShortTermRetentionPolicy>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<InterfaceEndpointProfile>>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -520,7 +502,7 @@ namespace Microsoft.Azure.Management.Sql
         }
 
         /// <summary>
-        /// Updates a database's short term retention policy.
+        /// Creates or updates a interface endpoint profile.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -529,11 +511,9 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='serverName'>
         /// The name of the server.
         /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
+        /// <param name='interfaceEndpointProfileName'>
         /// </param>
         /// <param name='parameters'>
-        /// The short term retention policy info.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -556,7 +536,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<BackupShortTermRetentionPolicy>> BeginCreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<InterfaceEndpointProfile>> BeginCreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string interfaceEndpointProfileName, InterfaceEndpointProfile parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
@@ -566,19 +546,22 @@ namespace Microsoft.Azure.Management.Sql
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "serverName");
             }
-            if (databaseName == null)
+            if (interfaceEndpointProfileName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "databaseName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "interfaceEndpointProfileName");
             }
             if (parameters == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
             }
+            if (parameters != null)
+            {
+                parameters.Validate();
+            }
             if (Client.SubscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.SubscriptionId");
             }
-            string policyName = "default";
             string apiVersion = "2017-10-01-preview";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -589,20 +572,18 @@ namespace Microsoft.Azure.Management.Sql
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("serverName", serverName);
-                tracingParameters.Add("databaseName", databaseName);
-                tracingParameters.Add("policyName", policyName);
+                tracingParameters.Add("interfaceEndpointProfileName", interfaceEndpointProfileName);
                 tracingParameters.Add("parameters", parameters);
                 tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "BeginCreateOrUpdate", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}").ToString();
+            var _baseUrl = "https://brazilus.management.azure.com/";
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles/{interfaceEndpointProfileName}").ToString();
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{serverName}", System.Uri.EscapeDataString(serverName));
-            _url = _url.Replace("{databaseName}", System.Uri.EscapeDataString(databaseName));
-            _url = _url.Replace("{policyName}", System.Uri.EscapeDataString(policyName));
+            _url = _url.Replace("{interfaceEndpointProfileName}", System.Uri.EscapeDataString(interfaceEndpointProfileName));
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -673,7 +654,7 @@ namespace Microsoft.Azure.Management.Sql
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 202)
+            if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
@@ -708,7 +689,7 @@ namespace Microsoft.Azure.Management.Sql
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<BackupShortTermRetentionPolicy>();
+            var _result = new AzureOperationResponse<InterfaceEndpointProfile>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -721,7 +702,25 @@ namespace Microsoft.Azure.Management.Sql
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<BackupShortTermRetentionPolicy>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<InterfaceEndpointProfile>(_responseContent, Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            // Deserialize Response
+            if ((int)_statusCode == 201)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<InterfaceEndpointProfile>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -741,7 +740,7 @@ namespace Microsoft.Azure.Management.Sql
         }
 
         /// <summary>
-        /// Updates a database's short term retention policy.
+        /// Deletes the interface endpoint profile with the given name.
         /// </summary>
         /// <param name='resourceGroupName'>
         /// The name of the resource group that contains the resource. You can obtain
@@ -750,11 +749,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='serverName'>
         /// The name of the server.
         /// </param>
-        /// <param name='databaseName'>
-        /// The name of the database.
-        /// </param>
-        /// <param name='parameters'>
-        /// The short term retention policy info.
+        /// <param name='interfaceEndpointProfileName'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -765,9 +760,6 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="CloudException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
@@ -777,7 +769,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<BackupShortTermRetentionPolicy>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, BackupShortTermRetentionPolicy parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> BeginDeleteWithHttpMessagesAsync(string resourceGroupName, string serverName, string interfaceEndpointProfileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
@@ -787,19 +779,14 @@ namespace Microsoft.Azure.Management.Sql
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "serverName");
             }
-            if (databaseName == null)
+            if (interfaceEndpointProfileName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "databaseName");
-            }
-            if (parameters == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
+                throw new ValidationException(ValidationRules.CannotBeNull, "interfaceEndpointProfileName");
             }
             if (Client.SubscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.SubscriptionId");
             }
-            string policyName = "default";
             string apiVersion = "2017-10-01-preview";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -810,20 +797,17 @@ namespace Microsoft.Azure.Management.Sql
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("serverName", serverName);
-                tracingParameters.Add("databaseName", databaseName);
-                tracingParameters.Add("policyName", policyName);
-                tracingParameters.Add("parameters", parameters);
+                tracingParameters.Add("interfaceEndpointProfileName", interfaceEndpointProfileName);
                 tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "BeginUpdate", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "BeginDelete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles/{interfaceEndpointProfileName}").ToString();
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{serverName}", System.Uri.EscapeDataString(serverName));
-            _url = _url.Replace("{databaseName}", System.Uri.EscapeDataString(databaseName));
-            _url = _url.Replace("{policyName}", System.Uri.EscapeDataString(policyName));
+            _url = _url.Replace("{interfaceEndpointProfileName}", System.Uri.EscapeDataString(interfaceEndpointProfileName));
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
@@ -837,7 +821,7 @@ namespace Microsoft.Azure.Management.Sql
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
+            _httpRequest.Method = new HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
@@ -868,12 +852,6 @@ namespace Microsoft.Azure.Management.Sql
 
             // Serialize Request
             string _requestContent = null;
-            if(parameters != null)
-            {
-                _requestContent = Rest.Serialization.SafeJsonConvert.SerializeObject(parameters, Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            }
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -894,7 +872,7 @@ namespace Microsoft.Azure.Management.Sql
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 202)
+            if ((int)_statusCode != 200 && (int)_statusCode != 202 && (int)_statusCode != 204)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
@@ -929,30 +907,12 @@ namespace Microsoft.Azure.Management.Sql
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<BackupShortTermRetentionPolicy>();
+            var _result = new AzureOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
-            }
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
-                {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<BackupShortTermRetentionPolicy>(_responseContent, Client.DeserializationSettings);
-                }
-                catch (JsonException ex)
-                {
-                    _httpRequest.Dispose();
-                    if (_httpResponse != null)
-                    {
-                        _httpResponse.Dispose();
-                    }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
-                }
             }
             if (_shouldTrace)
             {
@@ -962,7 +922,7 @@ namespace Microsoft.Azure.Management.Sql
         }
 
         /// <summary>
-        /// Gets a database's short term retention policy.
+        /// Gets a list of interface endpoint profiles attached to a server.
         /// </summary>
         /// <param name='nextPageLink'>
         /// The NextLink from the previous successful call to List operation.
@@ -988,7 +948,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IPage<BackupShortTermRetentionPolicy>>> ListByDatabaseNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<InterfaceEndpointProfile>>> ListByServerNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -1003,7 +963,7 @@ namespace Microsoft.Azure.Management.Sql
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("nextPageLink", nextPageLink);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "ListByDatabaseNext", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ListByServerNext", tracingParameters);
             }
             // Construct URL
             string _url = "{nextLink}";
@@ -1102,7 +1062,7 @@ namespace Microsoft.Azure.Management.Sql
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<IPage<BackupShortTermRetentionPolicy>>();
+            var _result = new AzureOperationResponse<IPage<InterfaceEndpointProfile>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1115,7 +1075,7 @@ namespace Microsoft.Azure.Management.Sql
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<BackupShortTermRetentionPolicy>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<InterfaceEndpointProfile>>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
